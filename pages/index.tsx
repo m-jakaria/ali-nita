@@ -183,7 +183,7 @@ const Home = () => {
                 {/* Tambahkan tag audio di sini di atas seluruh konten */}
                 <audio autoPlay>
                     <source
-                        src="/audio/lagudek.mp3"
+                        src="https://ali-nita.vercel.app/audio/lagudek.mp3"
                         type="audio/mpeg"
                     />
                     Maaf, browser Anda tidak mendukung audio.
