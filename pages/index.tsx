@@ -12,7 +12,6 @@ import { getWindowDimensions } from '../utils/utils'
 import { GetServerSideProps } from 'next'
 import Prokes from '../components/sections/Prokes'
 import Thanks from '../components/sections/Thanks'
-// import audioFile from '../components/audio/lagudek.mp3' // Ganti dengan path audio Anda
 
 const Countdown = dynamic(() => import('../components/sections/Countdown'), {
     ssr: false,
@@ -180,19 +179,19 @@ const Home = () => {
                         </div>
                     </section>
                 </PageContainer>
-            </div>
 
-            {/* Tambahkan tag audio di sini di atas seluruh konten */}
-            {/* <audio
-                autoPlay
-                controls
-            >
-                <source
-                    src={audioFile}
-                    type="audio/mpeg"
-                />
-                Maaf, browser Anda tidak mendukung audio.
-            </audio> */}
+                {/* Tambahkan tag audio di sini di atas seluruh konten */}
+                <audio
+                    autoPlay
+                    controls
+                >
+                    <source
+                        src="/audio/lagudek.mp3"
+                        type="audio/mpeg"
+                    />
+                    Maaf, browser Anda tidak mendukung audio.
+                </audio>
+            </div>
         </main>
     )
 }
