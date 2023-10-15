@@ -1,9 +1,4 @@
 import React, { useState } from 'react'
-import Mask from '../../public/svg/Capture1.PNG'
-import Sanitize from '../../public/svg/Capture2.PNG'
-import Wash from '../../public/svg/Capture3.PNG'
-
-import Image from 'next/image'
 
 interface ProkesProps {
     isActive: boolean
@@ -19,10 +14,11 @@ const Prokes: React.FC<ProkesProps> = ({ isActive }) => {
     }
 
     const images = [
-        { src: Mask, alt: 'Memakai Masker' },
-        { src: Sanitize, alt: 'Gunakan Hand Sanitizer' },
-        { src: Wash, alt: 'Mencuci Tangan' },
-  
+        { src: '/picture/Capture1.PNG', alt: 'Memakai Masker' },
+        { src: '/picture/Capture2.PNG', alt: 'Gunakan Hand Sanitizer' },
+        { src: '/picture/Capture3.PNG', alt: 'Mencuci Tangan' },
+        { src: '/picture/Capture4.PNG', alt: 'Mencuci Tangan' },
+        { src: '/picture/Capture5.PNG', alt: 'Mencuci Tangan' },
     ]
 
     const CLASSES = [
@@ -38,11 +34,11 @@ const Prokes: React.FC<ProkesProps> = ({ isActive }) => {
         <>
             <div className={`${CLASSES[0]} w-full`}>
                 <h1 className="text-2xl text-center md:text-4xl laptop:text-3xl 2xl:text-4xl font-HinaMincho">
-                    PROTOKOL KESEHATAN
+                    Gallery Kami
                 </h1>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-full p-4 md:p-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-full p-4 md:p-10 overflow-y-auto">
                 {images.map((image, index) => (
                     <div
                         key={index}
@@ -52,16 +48,13 @@ const Prokes: React.FC<ProkesProps> = ({ isActive }) => {
                         onTransitionEnd={handleTransitionEnd}
                     >
                         <div className="w-200 md:w-200">
-                            <Image
+                            <img
                                 src={image.src}
                                 alt={image.alt}
-                                width={400}
-                                height={200}
+                                width="400"
+                                height="200"
                             />
                         </div>
-                        <span className="mt-2 text-lg font-Inter text-center">
-              
-                        </span>
                     </div>
                 ))}
             </div>
