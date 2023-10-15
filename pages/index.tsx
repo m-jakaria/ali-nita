@@ -55,6 +55,11 @@ const Home = () => {
     const scrollContainer = useRef<HTMLDivElement>(null)
     const { height, refresh } = useWindowDimensions()
 
+    const playAudio = () => {
+        const audio = new Audio('/audio/lagudek.mp3')
+        audio.play()
+    }
+
     useEffect(() => {
         refresh()
     }, [refresh])
@@ -180,14 +185,14 @@ const Home = () => {
                     </section>
                 </PageContainer>
 
-                {/* Tambahkan tag audio di sini di atas seluruh konten */}
-                <audio autoPlay>
-                    <source
-                        src="https://ali-nita.vercel.app/audio/lagudek.mp3"
-                        type="audio/mpeg"
-                    />
-                    Maaf, browser Anda tidak mendukung audio.
-                </audio>
+                {/* Button to play audio */}
+                <button
+                    type="button"
+                    className="absolute flex flex-row items-center justify-center text-gold top-[2rem] right-[0.75rem]"
+                    onClick={playAudio}
+                >
+           
+                </button>
             </div>
         </main>
     )

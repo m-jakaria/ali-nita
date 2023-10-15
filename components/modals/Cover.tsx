@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import flowerCircle from '../../public/svg/flower-circle-final.svg'
 import BgFlowerHorizontalUp from '../BgFlowerHorizontalUp'
@@ -12,12 +12,14 @@ interface CoverProps {
 
 const Cover: React.FC<CoverProps> = ({ open, setOpen, recipient }) => {
     const mainDivRef = useRef<HTMLDivElement>(null)
+    const audioRef = useRef<HTMLAudioElement>(null)
+    const [audioIsPlaying, setAudioIsPlaying] = useState(false)
 
     const handleDivTouch = useCallback((e: TouchEvent) => {
         e.stopPropagation()
     }, [])
 
-    const handleDivWheel: React.WheelEventHandler<HTMLDivElement> = (e) => {
+    const handleDivWheel: React.WheelEventHandler<HTMLDivElement> = e => {
         e.stopPropagation()
     }
 
@@ -36,6 +38,19 @@ const Cover: React.FC<CoverProps> = ({ open, setOpen, recipient }) => {
             instance!.removeEventListener('touchmove', handleDivTouch)
         }
     }, [handleDivTouch])
+
+    const toggleAudio = () => {
+        if (audioRef.current) {
+            if (audioIsPlaying) {
+                audioRef.current.pause()
+            } else {
+                audioRef.current.play().catch(error => {
+                    console.error('Error playing audio:', error)
+                })
+            }
+            setAudioIsPlaying(!audioIsPlaying)
+        }
+    }
 
     return (
         <div
@@ -78,7 +93,6 @@ const Cover: React.FC<CoverProps> = ({ open, setOpen, recipient }) => {
                         <div className="flex flex-col font-HinaMincho">
                             <p>Kepada:</p>
 
-                            {/* 20 chars */}
                             <div className="flex items-center justify-center px-2 md:pt-4 md:pb-5 md:px-5 w-[65vw] md:w-[50vw] lg:w-[30vw] laptop:w-[20vw] 2xl:w-[15vw] min-h-[10vh] border-2 rounded-md border-gold">
                                 <span className="leading-none text-center md:text-xl">
                                     <h3>SAUDARA/KERABAT TERCINTA</h3>
@@ -90,16 +104,28 @@ const Cover: React.FC<CoverProps> = ({ open, setOpen, recipient }) => {
                             <button
                                 type="button"
                                 className="flex flex-row items-center justify-center p-1 px-2 mx-auto md:p-2 md:px-4 laptop:p-1 laptop:px-2 2xl:px-4 flex-nowrap bg-gold rounded-2xl text-blue-floral"
-                                onClick={() => setOpen(false)}
+                                onClick={() => {
+                                    toggleAudio()
+                                    setOpen(false)
+                                }}
                             >
                                 <span className="ml-1 text-sm md:text-base laptop:text-sm 2xl:text-base font-Inter">
-                                    Buka Undangan
+                                    {audioIsPlaying
+                                        ? 'Buka Undangan'
+                                        : 'Buka Undangan'}
                                 </span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+            <audio ref={audioRef}>
+                <source
+                    src="/audio/lagudek.mp3"
+                    type="audio/mpeg"
+                />
+                Maaf, browser Anda tidak mendukung audio.
+            </audio>
         </div>
     )
 }
