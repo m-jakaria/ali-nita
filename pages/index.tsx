@@ -181,10 +181,7 @@ const Home = () => {
                 </PageContainer>
 
                 {/* Tambahkan tag audio di sini di atas seluruh konten */}
-                <audio
-                    autoPlay
-                    controls
-                >
+                <audio autoPlay>
                     <source
                         src="/audio/lagudek.mp3"
                         type="audio/mpeg"
